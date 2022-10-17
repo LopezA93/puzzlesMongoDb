@@ -5,7 +5,7 @@ const productRoute = require('./routes/productos')
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-app.use('/product', productRoute)
+app.use('/products', productRoute)
 app.get('/', (req, res) => {
     res.json({message:'Bienvenido'})
 })
