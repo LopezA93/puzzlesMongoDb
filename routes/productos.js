@@ -3,7 +3,7 @@ const { Router } = express;
 
 const productRoute= Router()
 productRoute.use(express.json())
-productRoute.use(express.urlencoded({extended:true}))
+productRoute.use(express.urlencoded({extended:false}))
 
 
 productRoute.get('/', (req, res) => {

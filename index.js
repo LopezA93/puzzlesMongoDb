@@ -3,7 +3,7 @@ const PORT = 8080
 const app = express()
 const productRoute = require('./routes/productos')
 app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:false}))
 
 app.use('/products', productRoute)
 app.get('/', (req, res) => {
