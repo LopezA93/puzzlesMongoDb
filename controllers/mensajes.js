@@ -18,7 +18,6 @@ const saveMsj = async (req, res) => {
 };
 
 const getMsj = async (req, res) => {
-    console.log(req.session.user)
     const getAll = await msj.getAll()
     const mensj = getAll.map(i => {
         let mensaje = {

@@ -3,13 +3,13 @@ const { Router } = express;
 
 const productRoute = Router()
 
-const { 
+const {
     getProds,
     getProdById,
     saveProd,
     updateProd,
-    delProd, 
-    getProdByCategory} = require('../controllers/prods')
+    delProd,
+    getProdByCategory } = require('../controllers/prods')
 
 productRoute.use(express.json())
 productRoute.use(express.urlencoded({ extended: false }))
@@ -22,8 +22,8 @@ productRoute.get('/', getProds)
 //Get by Id
 // productRoute.get('/:id', getProdById);
 
-//Gey by Category
-productRoute.get('/:categoria', getProdByCategory)
+//Gey by Category or Id
+productRoute.get('/:params', getProdByCategory)
 
 //Send prod
 productRoute.post('/', saveProd)

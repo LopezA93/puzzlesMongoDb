@@ -30,6 +30,7 @@ app.use(session({
         mongoUrl: process.env.DATABASE,
         mongoOptions,
         retries: 0,
+        ttl:600,
         cookie: {
             maxAge: 600,
 
