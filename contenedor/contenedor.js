@@ -23,7 +23,16 @@ class ContenedorMongoDB {
             return getById
 
         } catch (error) {
-            return console.log(error)
+            return console.log(error) 
+
+        }
+    }
+    async getByCategory(cat) {
+        try {
+            const getByCat = await this.url.find({ categoria: cat })
+            return getByCat
+        } catch (error) {
+            return console.log(error) 
 
         }
     }
