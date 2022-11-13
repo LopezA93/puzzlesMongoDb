@@ -23,7 +23,7 @@ class ContenedorMongoDB {
             return getById
 
         } catch (error) {
-            return console.log(error) 
+            return error 
 
         }
     }
@@ -32,7 +32,16 @@ class ContenedorMongoDB {
             const getByCat = await this.url.find({ categoria: cat })
             return getByCat
         } catch (error) {
-            return console.log(error) 
+            error 
+
+        }
+    };
+    async getByEmail(email) {
+        try {
+            const getEmail = await this.url.find({ email: email })
+            return getEmail
+        } catch (error) {
+            return error 
 
         }
     }

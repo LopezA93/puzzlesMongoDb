@@ -28,5 +28,17 @@ const getMsj = async (req, res) => {
     });
     res.send(mensj)
 };
+const getMsjByEmail = async (req, res) => {
+    const email = req.params.email
+    const getByEmail = await msj.getByEmail(email);
+    const mensj = getByEmail.map(i => {
+        let mensaje = {
+            email: i.email,
+            texto: i.texto
+        };
+        return mensaje
+    });
+    res.send(mensj)
+}
 
-module.exports = { getMsj, saveMsj }
+module.exports = { getMsj, saveMsj, getMsjByEmail }

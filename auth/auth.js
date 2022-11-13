@@ -34,13 +34,15 @@ passport.use('login', new LocalStrategy({
 
     try {
         const usuario = await user.findOne({ email });
+        if(!usuario) {
+            return done(null, false, {message:'Usuario no encontrado'})
+        }
         const hassPass = usuario.password
         if (!usuario || !comparePassword(password, hassPass)) {
-            return done(null, false, new Error({ message: "Usuario no encontrado o password invalido" }))
-        } else {
-
-            return done(null, usuario, { message: "Logeado correctamente" })
+            return done(null, null, console.log({ message: "Usuario no encontrado o password invalido" }))
         }
+        return done(null, usuario, console.log({ message: "Logeado correctamente" }))
+
     } catch (error) {
         return done(error)
     }
@@ -58,11 +60,11 @@ passport.use(new JWTStrategy({
 ))
 
 passport.serializeUser((user, done) => {
-    done(null, user._id)
+    done(null, user.email)
 })
 
-passport.deserializeUser(async (id, done) => {
-    const usuario = await user.findOne(id)
+passport.deserializeUser(async (email, done) => {
+    const usuario = await user.findOne({email}) // Ver para corregir PreEntrega3
     done(null, usuario)
 
 })

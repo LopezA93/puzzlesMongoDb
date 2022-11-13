@@ -12,7 +12,7 @@ users.post('/signup', passport.authenticate('signup', { session: false }), (req,
     })
 })
 
-users.post('/login', passport.authenticate('login', { session: false }), (req, res) => {
+users.post('/login', passport.authenticate('login', { failureRedirect: '/users/error', session: false, }), (req, res) => {
    const user = req.user
     const token = jwt.sign({
         data: {
@@ -25,11 +25,16 @@ users.post('/login', passport.authenticate('login', { session: false }), (req, r
         token
     })
 })
+
 const authJWT = passport.authenticate('jwt', { session: false })
 users.get('/profile', authJWT, (req, res) => {
     const user = req.user
     
     res.json({ message: `Bienvenido ${user.data.email}` })
 })
+
+users.get('/error', (req, res) => {
+    res.send('Usuario o contraseña invalidas')
+} )
 
 module.exports = users

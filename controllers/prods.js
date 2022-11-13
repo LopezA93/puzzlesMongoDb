@@ -30,9 +30,7 @@ const getProdByCategory = async (req, res) => {
     if (params.length >= 15) {
         const filtrado = await prods.getById(params)
         filtrado ?
-            res.json({
-                
-            }) :
+            res.json(filtrado) :
             res.json({ message: "Error, no se encuentra producto" })
     } else {
         const filtrado = await prods.getByCategory(params)

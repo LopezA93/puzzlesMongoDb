@@ -2,10 +2,10 @@ const express = require('express');
 const {Router} = express
 
 const chatRoute= Router()
-const {getMsj, saveMsj} = require('../controllers/mensajes')
+const {getMsj, saveMsj,getMsjByEmail} = require('../controllers/mensajes')
 
 chatRoute.get('/', getMsj)
 chatRoute.post('/', saveMsj)
-// chat.get('/:email', )
+chatRoute.get('/:email', getMsjByEmail)
 
 module.exports = chatRoute
