@@ -26,19 +26,20 @@ const getProdById = async (req, res) => {
 };
 
 const getProdByCategory = async (req, res) => {
-    const params = req.params.params.toLowerCase();
-    if (params.length >= 15) {
+    const params = req.params.filter.toLowerCase();
+    if (params.length >= 10) {
+        
         const filtrado = await prods.getById(params)
         filtrado ?
             res.json(filtrado) :
-            res.json({ message: "Error, no se encuentra producto" })
+            res.send({ message: "Error, no se encuentra producto" })
     } else {
         const filtrado = await prods.getByCategory(params)
         filtrado.length !== 0 ?
             res.json(filtrado) :
             res.json({ message: "Error, no se encuentra productos con la categoria ingresada." })
     }
-    
+
 }
 
 const saveProd = async (req, res) => {

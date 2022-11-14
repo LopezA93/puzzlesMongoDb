@@ -9,7 +9,7 @@ const MongoStore = require('connect-mongo');
 const productRoute = require('./routes/productos')
 const userRoute = require('./routes/users');
 const chatRoute = require('./routes/mensajes');
-
+const ordenRoute= require('./routes/ordenes')
 
 //Config
 const connection = require('./database/config');
@@ -47,12 +47,17 @@ app.use(passport.initialize())
 
 app.use('/products', productRoute)
 app.use('/users', userRoute)
-app.use('/chat', chatRoute)
+app.use('/chat', chatRoute);
+app.use('/orden', ordenRoute)
+
 //
 app.get('/', (req, res) => {
     res.json({ message: 'Bienvenido' })
 });
 
+app.get('*', (req, res) => {
+    res.status(404).send(`Ruta: ${req.url} no encontrada`)
+})
 
 
 // const users = [{

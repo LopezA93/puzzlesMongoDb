@@ -22,8 +22,8 @@ productRoute.get('/', getProds)
 //Get by Id
 // productRoute.get('/:id', getProdById);
 
-//Gey by Category or Id
-productRoute.get('/:params', getProdByCategory)
+//Gey by Category or Id 
+productRoute.get('/:filter', getProdByCategory)
 
 //Send prod
 productRoute.post('/', saveProd)

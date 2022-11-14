@@ -36,5 +36,11 @@ users.get('/profile', authJWT, (req, res) => {
 users.get('/error', (req, res) => {
     res.send('Usuario o contraseña invalidas')
 } )
+users.get('/logout', (req, res) => {
+    req.session.destroy();
+    req.logout(() => {
+        res.send("deslogueado exitosamente")
+    })
+})
 
 module.exports = users

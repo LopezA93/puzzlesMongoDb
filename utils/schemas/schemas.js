@@ -21,19 +21,31 @@ const userSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true }
 });
-const mensajesSchema = Schema({
-    email: { type: String, required: true},
-    tipo: {type: String, required: true},
-    timestamp: { type: Date, default: Date.now } ,
+const mensajesSchema = new Schema({
+    email: { type: String, required: true },
+    tipo: { type: String, required: true },
+    timestamp: { type: Date, default: Date.now },
     texto: { type: String, required: true, max: 400 }
 });
 
+const ordenesSchema = new Schema({
+    email: { type: String, required: true, ref: 'User' },
+    estado: { type: Boolean, default: true },
+    productos: [{
+        productId: { type: String, required:true },
+        cantidad: { type: Number, required:true },
+        nombre: { type: String, required:true },
+        precio: { type: Number, required:true }
+    }],
+    numero: { type: Number, required: true },
 
+
+}, { timestamp: { type: Date, default: Date.now } })
 const productos = model('productos', prodSchema);
 const carritos = model('carrito', carritoSchema);
 const user = model('usuarios', userSchema);
 const mensajes = model('mensajes', mensajesSchema);
-
+const ordenes = model('ordenes', ordenesSchema)
 module.exports = {
     productos,
     prodSchema,
@@ -42,5 +54,7 @@ module.exports = {
     userSchema,
     user,
     mensajes,
-    mensajesSchema
+    mensajesSchema,
+    ordenesSchema,
+    ordenes
 }

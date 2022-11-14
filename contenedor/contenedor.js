@@ -19,13 +19,14 @@ class ContenedorMongoDB {
     async getById(id) {
 
         try {
-            const getById = await this.url.findOne({ _id: id })
+            const getById = await this.url.find({ _id: id })
             return getById
-
         } catch (error) {
-            return error 
-
+            error
         }
+            
+
+        
     }
     async getByCategory(cat) {
         try {

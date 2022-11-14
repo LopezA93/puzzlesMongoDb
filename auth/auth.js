@@ -35,11 +35,11 @@ passport.use('login', new LocalStrategy({
     try {
         const usuario = await user.findOne({ email });
         if(!usuario) {
-            return done(null, false, {message:'Usuario no encontrado'})
+            return done(null, false, console.log({message:'Usuario no encontrado'}))
         }
         const hassPass = usuario.password
-        if (!usuario || !comparePassword(password, hassPass)) {
-            return done(null, null, console.log({ message: "Usuario no encontrado o password invalido" }))
+        if (!comparePassword(password, hassPass)) {
+            return done(null, null, console.log({ message: "Password invalida" }))
         }
         return done(null, usuario, console.log({ message: "Logeado correctamente" }))
 
