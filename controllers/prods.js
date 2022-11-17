@@ -17,13 +17,13 @@ const getProds = async (req, res) => {
     }
 }
 
-const getProdById = async (req, res) => {
-    const id = req.params.id
-    const filtrado = await prods.getById(id)
-    filtrado ?
-        res.json(filtrado) :
-        res.json({ message: "Error, no se encuentra producto" })
-};
+// const getProdById = async (req, res) => {
+//     const id = req.params.id
+//     const filtrado = await prods.getById(id)
+//     filtrado ?
+//         res.json(filtrado) :
+//         res.json({ message: "Error, no se encuentra producto" })
+// };
 
 const getProdByCategory = async (req, res) => {
     const params = req.params.filter.toLowerCase();
@@ -117,7 +117,7 @@ const delProd = async (req, res) => {
 
 module.exports = {
     getProds,
-    getProdById,
+    // getProdById,
     saveProd,
     updateProd,
     delProd,

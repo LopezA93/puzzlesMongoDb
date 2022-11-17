@@ -60,67 +60,13 @@ app.get('*', (req, res) => {
 })
 
 
-// const users = [{
-//     email: "a@a.com",
-//     password: "asd"
-// }, {
-//     email: "a1@a.com",
-//     password: "asd"
-// },
-// ]
-// const verificarToken = (req, res, next) => {
-//     const headerToken = req.headers.authorization;
-//     if(!headerToken) {
-//         res.status(401).send({message: "No Autorizado"});
-//         return
-//     }
-//     const token = headerToken?.split(" ")[1];
-//     console.log(token);
 
-//     try {
-
-//         const validate = jwt.verify(token, process.env.SECRET_KEY)
-//         res.send(validate)
-//         next()
-//     } catch (error) {
-//         console.log(error);
-//         res.status(401).send({message: "No Autorizado"});
-
-//     }
-
-// }
-// app.post('/login', (req, res) => {
-//     const { email, password } = req.body
-
-//     if (!email || !password) {
-//         res.send({ message: "Debe incluir email y password" });
-//         return
-//     }
-//     const userfiltrado = users.find(u =>  u.email === email )
-//     if (!userfiltrado || userfiltrado?.password !== password) {
-//         res.send({ message: 'creden no validas' });
-//         return
-//     }
-//     const token = jwt.sign({
-//         data: {
-//             email: userfiltrado.email
-//         }
-//     }, process.env.SECRET_KEY, { expiresIn: "5m" })
-//     res.send({
-//         user: {
-//             email: userfiltrado.email,
-//             password: userfiltrado.password
-//         },
-//         token
-//     })
-
-
-// })
-// app.get('/profile', verificarToken, (req, res) => {
-//     res.send('Bienvenido a tu perfil')
-// })
 
 //Server On
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log('Servidor online puerto:', PORT)
 });
+
+server.on('error', ()=> {
+    console.log(error)
+})

@@ -64,7 +64,7 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (email, done) => {
-    const usuario = await user.findOne({email}) // Ver para corregir PreEntrega3
+    const usuario = await user.findOne({email}) 
     done(null, usuario)
 
 })
