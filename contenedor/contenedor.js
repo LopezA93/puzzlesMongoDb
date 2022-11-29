@@ -42,7 +42,7 @@ class ContenedorMongoDB {
             const getEmail = await this.url.find({ email: email })
             return getEmail
         } catch (error) {
-            return error 
+             error 
 
         }
     }

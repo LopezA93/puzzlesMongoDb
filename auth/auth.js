@@ -13,15 +13,16 @@ passport.use("signup", new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, async (req, email, password, done) => {
+    const {nombre, direccion, telefono} = req.body
     const usuario = await user.findOne({ email });
     if (usuario) {
-        return done(null, false)
+        return done(null, false, console.log('Usuario ya existente'))
 
 
     }
 
     const hashedPassword = hashPassword(password);
-    const newUser = new user({ email, password: hashedPassword });
+    const newUser = new user({ nombre, direccion, telefono, email, password: hashedPassword });
     await newUser.save();
     return done(null, newUser);
 }));
@@ -54,7 +55,6 @@ passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
 }, (payload, next) => {
     const user = payload;
-    console.log(user);
     return next(null, user)
 }
 ))

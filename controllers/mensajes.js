@@ -5,12 +5,15 @@ const msj = new MensajesMongo;
 
 const saveMsj = async (req, res) => {
 
-    const email = req.session.user;
+    // const email = req.session.user;
     const {
-        tipo,
+        email,
+        // tipo,
         texto
     } = req.body
-    const newMsj = new mensajes({ email: email, tipo: tipo, texto: texto });
+    const newMsj = new mensajes({ email: email, 
+        // tipo: tipo, 
+        texto: texto });
     const result = await msj.insertar(newMsj);
     result ?
         res.json(result) :

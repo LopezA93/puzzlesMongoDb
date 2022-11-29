@@ -5,7 +5,7 @@ const productRoute = Router()
 
 const {
     getProds,
-    getProdById,
+    // getProdById,
     saveProd,
     updateProd,
     delProd,
