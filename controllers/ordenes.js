@@ -40,8 +40,8 @@ const getOrderByUser = async (req, res) => {
         email: i.email,
         numero: i.numero,
         productos: i.productos,
-        estado: i.estado
-
+        estado: i.estado,
+        fecha: i.timestamp.toString()
     };
     return order
 });

@@ -26,9 +26,7 @@ const userSchema = new Schema({
   nombre: { type: String, required: true },
   telefono: { type: Number, required: true },
   direccion: { type: String, required: true },
-
-
-
+  role: { type: String, required: true, default: "user" },
 });
 const mensajesSchema = new Schema({
   email: { type: String, required: true },
@@ -37,22 +35,20 @@ const mensajesSchema = new Schema({
   texto: { type: String, required: true, max: 400 },
 });
 
-const ordenesSchema = new Schema(
-  {
-    email: { type: String, required: true, ref: "User" },
-    estado: { type: Boolean, default: true },
-    productos: [
-      {
-        productId: { type: String, required: true },
-        cantidad: { type: Number, required: true },
-        nombre: { type: String, required: true },
-        precio: { type: Number, required: true },
-      },
-    ],
-    numero: { type: Number, required: true },
-  },
-  { timestamp: { type: Date, default: Date.now } }
-);
+const ordenesSchema = new Schema({
+  email: { type: String, required: true, ref: "User" },
+  estado: { type: Boolean, default: true },
+  productos: [
+    {
+      productId: { type: String, required: true },
+      cantidad: { type: Number, required: true },
+      nombre: { type: String, required: true },
+      precio: { type: Number, required: true },
+    },
+  ],
+  numero: { type: Number, required: true },
+  timestamp: { type: Date, default: Date.now },
+});
 const productos = model("productos", prodSchema);
 const carritos = model("carrito", carritoSchema);
 const user = model("usuarios", userSchema);

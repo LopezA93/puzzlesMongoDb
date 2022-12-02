@@ -13,7 +13,7 @@ passport.use("signup", new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, async (req, email, password, done) => {
-    const {nombre, direccion, telefono} = req.body
+    const {nombre, direccion, telefono, role} = req.body
     const usuario = await user.findOne({ email });
     if (usuario) {
         return done(null, false, console.log('Usuario ya existente'))
@@ -22,7 +22,7 @@ passport.use("signup", new LocalStrategy({
     }
 
     const hashedPassword = hashPassword(password);
-    const newUser = new user({ nombre, direccion, telefono, email, password: hashedPassword });
+    const newUser = new user({ nombre, direccion, telefono, email, password: hashedPassword, role });
     await newUser.save();
     return done(null, newUser);
 }));

@@ -9,8 +9,8 @@ const {
     saveProd,
     updateProd,
     delProd,
-    getProdByCategory } = require('../controllers/prods')
-
+    getProdByCategory } = require('../controllers/prods');
+const isAuth = require('../middleware/auth');
 productRoute.use(express.json())
 productRoute.use(express.urlencoded({ extended: false }))
 
@@ -26,12 +26,12 @@ productRoute.get('/', getProds)
 productRoute.get('/:filter', getProdByCategory)
 
 //Send prod
-productRoute.post('/', saveProd)
+productRoute.post('/', isAuth,saveProd)
 
 //Update
-productRoute.put('/:id', updateProd)
+productRoute.put('/:id',isAuth, updateProd)
 
 //Delet
-productRoute.delete('/:id', delProd)
+productRoute.delete('/:id', isAuth,delProd)
 
 module.exports = productRoute

@@ -30,10 +30,11 @@ users.post(
       {
         data: {
           email: user.email,
+          role: user.role
         },
       },
       process.env.SECRET_KEY,
-      { expiresIn: "15m" }
+      { expiresIn: "1m" }
     );
     req.session.user = user.email;
     res.status(201).json({
@@ -42,6 +43,7 @@ users.post(
       nombre: user.nombre,
       direccion: user.direccion,
       telefono: user.telefono,
+      role: user.role,
       token,
     });
   }
@@ -51,8 +53,9 @@ const authJWT = passport.authenticate("jwt", { session: false });
 users.get("/profile", authJWT, (req, res) => {
   const user = req.user;
 
-  res.status(201).json({ message: `Bienvenido ${user.data.email}` });
+  res.status(201).json({ message: `Bienvenido ${user.data.email}  ` });
 });
+
 users.get("/signupfail", (req, res) => {
   res.status(401).send({ message: "Usuario ya existente" });
 });
