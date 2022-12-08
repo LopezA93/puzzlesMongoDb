@@ -34,7 +34,7 @@ users.post(
         },
       },
       process.env.SECRET_KEY,
-      { expiresIn: "1m" }
+      { expiresIn: "15m" }
     );
     req.session.user = user.email;
     res.status(201).json({

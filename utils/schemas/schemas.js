@@ -9,13 +9,16 @@ const prodSchema = new Schema(
     codigo: { type: Number, required: true },
     stock: { type: Number, required: true },
     categoria: { type: String, require: true },
+    cantidad: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
 
 const carritoSchema = new Schema(
   {
-    productos: { type: Object },
+    user: { type: String, required: true, ref: "user" },
+
+    productos: {type: Array, default: [] },
   },
   { timestamps: true }
 );
@@ -36,7 +39,7 @@ const mensajesSchema = new Schema({
 });
 
 const ordenesSchema = new Schema({
-  email: { type: String, required: true, ref: "User" },
+  email: { type: String, required: true, ref: "user" },
   estado: { type: Boolean, default: true },
   productos: [
     {
