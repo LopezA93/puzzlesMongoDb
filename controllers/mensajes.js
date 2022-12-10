@@ -1,5 +1,5 @@
 const MensajesMongo = require('../daos/mensajes');
-const { mensajes } = require('../utils/schemas/schemas');
+const { Mensajes } = require('../utils/schemas/schemas');
 
 const msj = new MensajesMongo;
 
@@ -11,7 +11,7 @@ const saveMsj = async (req, res) => {
         // tipo,
         texto
     } = req.body
-    const newMsj = new mensajes({ email: email, 
+    const newMsj = new Mensajes({ email: email, 
         // tipo: tipo, 
         texto: texto });
     const result = await msj.insertar(newMsj);

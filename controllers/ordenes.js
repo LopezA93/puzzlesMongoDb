@@ -1,5 +1,5 @@
 const OrdenesMongo = require("../daos/ordenes");
-const { ordenes } = require("../utils/schemas/schemas");
+const { Ordenes } = require("../utils/schemas/schemas");
 
 const orden = new OrdenesMongo();
 const mailOrden = require("../utils/nodemailer");
@@ -9,7 +9,7 @@ const generarOrden = async (req, res) => {
 
   let numero = getAll.length + 1;
 
-  let newOrden = new ordenes({
+  let newOrden = new Ordenes({
     email: req.session.user,
     productos: [
       {

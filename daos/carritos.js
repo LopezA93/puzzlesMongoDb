@@ -1,10 +1,10 @@
-const ContenedorMongoDB = require('../contenedor/contenedor')
+const ContenedorMongoDB = require("../contenedor/contenedor");
 
-const {carritos} = require('../utils/schemas/schemas')
+const { Carritos } = require("../utils/schemas/schemas");
 
 class CarritoMongo extends ContenedorMongoDB {
-    constructor() {
-        super(carritos)
-    }
+  constructor() {
+    super(Carritos);
+  }
 }
-module.exports= CarritoMongo
+module.exports = CarritoMongo;

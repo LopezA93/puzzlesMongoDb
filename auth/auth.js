@@ -1,6 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const { user } = require('../utils/schemas/schemas');
+const { User } = require('../utils/schemas/schemas');
 const { hashPassword, comparePassword } = require('../utils/hashPassword')
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt
@@ -14,7 +14,7 @@ passport.use("signup", new LocalStrategy({
     passwordField: 'password'
 }, async (req, email, password, done) => {
     const {nombre, direccion, telefono, role} = req.body
-    const usuario = await user.findOne({ email });
+    const usuario = await User.findOne({ email });
     if (usuario) {
         return done(null, false, console.log('Usuario ya existente'))
 
@@ -22,7 +22,7 @@ passport.use("signup", new LocalStrategy({
     }
 
     const hashedPassword = hashPassword(password);
-    const newUser = new user({ nombre, direccion, telefono, email, password: hashedPassword, role });
+    const newUser = new User({ nombre, direccion, telefono, email, password: hashedPassword, role });
     await newUser.save();
     return done(null, newUser);
 }));
@@ -34,7 +34,7 @@ passport.use('login', new LocalStrategy({
 }, async ( email, password, done) => {
 
     try {
-        const usuario = await user.findOne({ email });
+        const usuario = await User.findOne({ email });
         if(!usuario) {
             return done(null, false, console.log({message:'Usuario no encontrado'}))
         }

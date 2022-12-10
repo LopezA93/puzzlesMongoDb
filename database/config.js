@@ -4,7 +4,7 @@ require('dotenv').config();
 
 async function connection() {
 
-    const URLstring = process.env.DATABASE;
+    const URLstring = process.env.MONGODB_URI;
 
     await moongose.connect(URLstring)
 }

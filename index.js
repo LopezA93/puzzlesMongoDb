@@ -6,7 +6,11 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const cors = require("cors");
 app.use(cors());
-
+const productRoute = require("./routes/productos");
+const userRoute = require("./routes/users");
+const chatRoute = require("./routes/mensajes");
+const ordenRoute = require("./routes/ordenes");
+const cartRoute = require('./routes/carritos')
 //socket
 const { Server: HttpServer } = require("http");
 const { Server: SocketServer } = require("socket.io");
@@ -16,11 +20,8 @@ const socketServer = new SocketServer(httpServer, {
     origin: "http://localhost:3000",
   },
 });
-//Routes
-const productRoute = require("./routes/productos");
-const userRoute = require("./routes/users");
-const chatRoute = require("./routes/mensajes");
-const ordenRoute = require("./routes/ordenes");
+
+
 
 //Config
 const connection = require("./database/config");
@@ -38,7 +39,7 @@ app.use(
   session({
     //Base de datos Mongo
     store: MongoStore.create({
-      mongoUrl: process.env.DATABASE,
+      mongoUrl: process.env.MONGODB_URI,
       mongoOptions,
       retries: 0,
       ttl: 600,
@@ -58,7 +59,8 @@ app.use(passport.initialize());
 app.use("/products", productRoute);
 app.use("/users", userRoute);
 app.use("/chat", chatRoute);
-app.use("/orden", ordenRoute);
+app.use("/order", ordenRoute);
+app.use("/cart", cartRoute)
 
 
 //

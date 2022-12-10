@@ -1,10 +1,10 @@
 const ContenedorMongoDB = require('../contenedor/contenedor')
 
-const {mensajes} = require('../utils/schemas/schemas')
+const {Mensajes} = require('../utils/schemas/schemas')
 
 class MensajesMongo extends ContenedorMongoDB {
     constructor() {
-        super(mensajes)
+        super(Mensajes)
     }
 }
 module.exports= MensajesMongo

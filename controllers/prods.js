@@ -1,6 +1,6 @@
 const ProductosMongo = require('../daos/prods');
 
-const { productos } = require('../utils/schemas/schemas')
+const { Productos } = require('../utils/schemas/schemas')
 
 const prods = new ProductosMongo
 
@@ -53,7 +53,7 @@ const saveProd = async (req, res) => {
         categoria
 
     } = req.body
-    const newItem = new productos({
+    const newItem = new Productos({
         nombre: nombre,
         descripcion: descripcion,
         codigo: codigo,
