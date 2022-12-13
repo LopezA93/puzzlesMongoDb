@@ -8,8 +8,8 @@ const carrito = Router()
 carrito.get('/', getCarts)
 carrito.get('/:email', getByEmail)
 
-carrito.post('/:email', saveCart)
+carrito.post('/', saveCart)
 carrito.put('/:id', updateCart)
-carrito.delete('/:id', deleteCart )
+carrito.delete('/:email', deleteCart )
 
 module.exports= carrito

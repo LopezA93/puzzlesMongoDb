@@ -30,8 +30,8 @@ const getByEmail = async (req, res) => {
 
 const saveCart = async (req, res) => {
 
-  const email = req.params.email;
-  const { productos } = req.body;
+
+  const { email, productos, total } = req.body;
   console.log("email", email);
   const usuario = await User.findOne({ email: email });
   if (!usuario) {
@@ -42,6 +42,7 @@ const saveCart = async (req, res) => {
   const newCart = new Carritos({
     userId: usuario._id,
     productos: productos,
+    total
   });
 
   const result = await cart.insertar(newCart);
@@ -68,11 +69,22 @@ const updateCart = async (req, res) => {
 
 const deleteCart = async (req, res) => {
   try {
-    const id = req.params.id;
-    const eliminado = await cart.eliminar(id);
-    eliminado
-      ? res.json({ message: "Cart eliminado exitosamente" })
-      : res.json({ message: "Error, vuelva a intentarlo" });
+    const email   = req.params.email;
+
+    const usuario = await User.findOne({ email: email });
+    if (!usuario) {
+      res.status(201).json({ message: "Error vuelva a intentarlo" });
+      return;
+    }
+  
+  
+
+    usuario.carrito = []
+    await usuario.save()
+
+    res.json({message:'Carrito vaciado'})
+
+    
   } catch (error) {
     console.log(error);
   }
