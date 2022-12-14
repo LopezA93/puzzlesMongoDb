@@ -17,7 +17,7 @@ const { Server: SocketServer } = require("socket.io");
 const httpServer = new HttpServer(app);
 const socketServer = new SocketServer(httpServer, {
   cors: {
-    origin: "https://puzzles-bar.vercel.app",
+    origin: "https://puzzlesmongodb.netlify.app/",
   },
 });
 
