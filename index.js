@@ -17,7 +17,7 @@ const { Server: SocketServer } = require("socket.io");
 const httpServer = new HttpServer(app);
 const socketServer = new SocketServer(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://puzzles-bar.vercel.app",
   },
 });
 
