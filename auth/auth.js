@@ -13,7 +13,7 @@ passport.use("signup", new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, async (req, email, password, done) => {
-    const {nombre, direccion, telefono, role} = req.body
+    const {nombre, direccion, ciudad, telefono, role} = req.body
     const usuario = await User.findOne({ email });
     if (usuario) {
         return done(null, false, console.log('Usuario ya existente'))
@@ -22,7 +22,7 @@ passport.use("signup", new LocalStrategy({
     }
 
     const hashedPassword = hashPassword(password);
-    const newUser = new User({ nombre, direccion, telefono, email, password: hashedPassword, role });
+    const newUser = new User({ nombre, direccion, ciudad, telefono, email, password: hashedPassword, role });
     await newUser.save();
     return done(null, newUser);
 }));
@@ -64,7 +64,7 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (email, done) => {
-    const usuario = await user.findOne({email}) 
+    const usuario = await User.findOne({email}) 
     done(null, usuario)
 
 })

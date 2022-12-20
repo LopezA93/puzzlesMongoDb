@@ -34,14 +34,15 @@ users.post(
         },
       },
       process.env.SECRET_KEY,
-      { expiresIn: "15m" }
+      { expiresIn: "30m" }
     );
     req.session.user = user.email;
     res.status(201).json({
-      // user:user
+
       email: user.email,
       nombre: user.nombre,
       direccion: user.direccion,
+      ciudad: user.ciudad,
       telefono: user.telefono,
       role: user.role,
       token,

@@ -4,28 +4,24 @@ const { Ordenes } = require("../utils/schemas/schemas");
 const orden = new OrdenesMongo();
 const mailOrden = require("../utils/nodemailer");
 const generarOrden = async (req, res) => {
-  const { nombre, precio, cantidad, productId } = req.body;
+  const { email, productos, total, direccion, ciudad } = req.body;
   const getAll = await orden.getAll();
 
   let numero = getAll.length + 1;
 
   let newOrden = new Ordenes({
-    email: req.session.user,
-    productos: [
-      {
-        productId,
-        cantidad,
-        nombre,
-        precio,
-      },
-    ],
+    email,
+    productos,
+    total,
     numero,
+    ciudad, 
+    direccion
   });
   const result = await orden.insertar(newOrden);
 
   console.log("result:", result);
   if (result) {
-    mailOrden(req.session.user, result);
+    mailOrden(email, result);
     res.json(result);
   } else {
     res.json({ message: "Error, vuelva a intentarlo" });
@@ -41,7 +37,8 @@ const getOrderByUser = async (req, res) => {
         numero: i.numero,
         productos: i.productos,
         estado: i.estado,
-        fecha: i.timestamp.toString()
+        fecha: i.timestamp.toString(),
+        total: i.total
     };
     return order
 });

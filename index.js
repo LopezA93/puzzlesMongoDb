@@ -26,6 +26,7 @@ const socketServer = new SocketServer(httpServer, {
 //Config
 const connection = require("./database/config");
 const passport = require("passport");
+const mercadoPagoRouter = require("./routes/mercadopago");
 connection();
 require("dotenv").config();
 require("./auth/auth");
@@ -61,7 +62,7 @@ app.use("/users", userRoute);
 app.use("/chat", chatRoute);
 app.use("/order", ordenRoute);
 app.use("/cart", cartRoute)
-
+app.use("/mercadopago", mercadoPagoRouter)
 
 //
 app.get("/", (req, res) => {

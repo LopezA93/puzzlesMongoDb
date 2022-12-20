@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const prodSchema = new Schema(
   {
@@ -15,18 +15,15 @@ const prodSchema = new Schema(
   { timestamps: true }
 );
 
-
-
-
-
 const userSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true, min: 8 },
   nombre: { type: String, required: true },
   telefono: { type: Number, required: true },
   direccion: { type: String, required: true },
+  ciudad: { type:String, required:true},
   role: { type: String, required: true, default: "user" },
-  carrito: [{ type: Schema.Types.ObjectId, ref: 'carrito' }]
+  carrito: [{ type: Schema.Types.ObjectId, ref: "carrito" }],
 });
 const User = mongoose.model("usuarios", userSchema);
 
@@ -47,7 +44,7 @@ const carritoSchema = new Schema(
         precio: { type: Number, required: true },
       },
     ],
-    total: {type: Number, default: 0}
+    total: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
@@ -56,12 +53,14 @@ const ordenesSchema = new Schema({
   estado: { type: Boolean, default: true },
   productos: [
     {
-      productId: { type: String, required: true },
-      cantidad: { type: Number, required: true },
       nombre: { type: String, required: true },
       precio: { type: Number, required: true },
+      cantidad: { type: Number, required: true },
     },
   ],
+  direccion: { type: String, required: true },
+  ciudad: { type:String, required:true},
+  total: { type: Number, required: true },
   numero: { type: Number, required: true },
   timestamp: { type: Date, default: Date.now },
 });
