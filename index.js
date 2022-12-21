@@ -5,7 +5,9 @@ const session = require("express-session");
 
 const MongoStore = require("connect-mongo");
 const cors = require("cors");
-app.use(cors());
+app.use(cors({
+  origin: "*",
+}));
 const productRoute = require("./routes/productos");
 const userRoute = require("./routes/users");
 const chatRoute = require("./routes/mensajes");
