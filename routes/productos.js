@@ -1,37 +1,32 @@
-const express = require('express');
+const express = require("express");
 const { Router } = express;
 
-const productRoute = Router()
+const productRoute = Router();
 
 const {
-    getProds,
-    // getProdById,
-    saveProd,
-    updateProd,
-    delProd,
-    getProdByCategory } = require('../controllers/prods');
-const isAuth = require('../middleware/auth');
-productRoute.use(express.json())
-productRoute.use(express.urlencoded({ extended: false }))
-
-
+  getProds,
+  saveProd,
+  updateProd,
+  delProd,
+  getProdByCategory,
+} = require("../controllers/prods");
+const isAuth = require("../middleware/auth");
+productRoute.use(express.json());
+productRoute.use(express.urlencoded({ extended: false }));
 
 //Get all
-productRoute.get('/', getProds)
+productRoute.get("/", getProds);
 
-//Get by Id
-// productRoute.get('/:id', getProdById);
-
-//Gey by Category or Id 
-productRoute.get('/:filter', getProdByCategory)
+//Gey by Category or Id
+productRoute.get("/:filter", getProdByCategory);
 
 //Send prod
-productRoute.post('/', isAuth,saveProd)
+productRoute.post("/", isAuth, saveProd);
 
 //Update
-productRoute.put('/:id',isAuth, updateProd)
+productRoute.put("/:id", isAuth, updateProd);
 
 //Delet
-productRoute.delete('/:id', isAuth,delProd)
+productRoute.delete("/:id", isAuth, delProd);
 
-module.exports = productRoute
+module.exports = productRoute;

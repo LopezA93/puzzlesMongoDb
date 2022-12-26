@@ -14,8 +14,8 @@ const generarOrden = async (req, res) => {
     productos,
     total,
     numero,
-    ciudad, 
-    direccion
+    ciudad,
+    direccion,
   });
   const result = await orden.insertar(newOrden);
 
@@ -31,29 +31,22 @@ const generarOrden = async (req, res) => {
 const getOrderByUser = async (req, res) => {
   const email = req.params.email;
   const result = await orden.getByEmail(email);
-  const orders = result.map(i => {
+  const orders = result.map((i) => {
     let order = {
-        email: i.email,
-        numero: i.numero,
-        productos: i.productos,
-        estado: i.estado,
-        fecha: i.timestamp.toString(),
-        total: i.total
+      email: i.email,
+      numero: i.numero,
+      productos: i.productos,
+      estado: i.estado,
+      fecha: i.timestamp.toString(),
+      total: i.total,
     };
-    return order
-});
-  // const {estado, numero, productos} = result
+    return order;
+  });
+ 
+  result.length !== 0
+    ? res.json(orders)
+    : res.json({ message: "No existen ordenes con este email" });
 
-  // const dataOrder = result.forEach(e => {
-
-  //     return e})
-    result.length !==0 ? res.json(orders) :
-    res.json({message:"No existen ordenes con este email"})
-
-    // if (result) {
-    //   res.json(result);
-    // } else {
-    //   res.json({ message: "Este usuario no tiene ordenes" });
-    // }
+ 
 };
 module.exports = { generarOrden, getOrderByUser };

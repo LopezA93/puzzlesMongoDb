@@ -19,7 +19,7 @@ const { Server: SocketServer } = require("socket.io");
 const httpServer = new HttpServer(app);
 const socketServer = new SocketServer(httpServer, {
   cors: {
-    origin: "https://puzzlesmongodb.netlify.app/",
+    origin: "*",
   },
 });
 
@@ -78,7 +78,6 @@ app.get("*", (req, res) => {
 //Socket
 
 socketServer.on("connection", (socket) => {
-  // console.log("conectado al servidor");
   socket.on("message", (mensaje) => {
     socket.broadcast.emit("message", {
       mensaje,

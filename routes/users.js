@@ -5,6 +5,8 @@ const users = Router();
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
+//CRUD
+
 users.post(
   "/signup",
   passport.authenticate("signup", {
