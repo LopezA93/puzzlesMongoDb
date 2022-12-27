@@ -6,7 +6,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const cors = require("cors");
 app.use(cors({
-  origin: "https://puzzlesmongodb.netlify.app",
+  origin: "*",
 }));
 const productRoute = require("./routes/productos");
 const userRoute = require("./routes/users");

@@ -45,8 +45,15 @@ const mailOrden = async (user, order) => {
     //     <p> Desde ya muchas gracias por su compra. Cualquier duda o consulta no dude en contactarnos.</p>
         
     //      `,
-    });
-    console.log(`Se genero el envio de mail de la orden: ${order.numero}`);
+    }, (err, info) => {
+      if (err) {
+        console.error(err.message);
+      } else {
+        res.json(info.response);
+        console.log(`Se genero el envio de mail de la orden: ${order.numero}`);
+      }}
+      )
+    
   } catch (error) {
     console.log(`Error en el envio de la orden: ${error}`);
   } finally {
