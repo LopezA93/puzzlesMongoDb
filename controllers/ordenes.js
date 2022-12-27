@@ -3,6 +3,8 @@ const { Ordenes } = require("../utils/schemas/schemas");
 
 const orden = new OrdenesMongo();
 const mailOrden = require("../utils/nodemailer");
+
+
 const generarOrden = async (req, res) => {
   const { email, productos, total, direccion, ciudad } = req.body;
   const getAll = await orden.getAll();
@@ -19,12 +21,12 @@ const generarOrden = async (req, res) => {
   });
   const result = await orden.insertar(newOrden);
 
-  console.log("result:", result);
+
   if (result) {
     mailOrden(email, result);
     res.json(result);
   } else {
-    res.json({ message: "Error, vuelva a intentarlo" });
+    res.status(404).json({ message: "Error, vuelva a intentarlo" });
   }
 };
 
@@ -42,11 +44,9 @@ const getOrderByUser = async (req, res) => {
     };
     return order;
   });
- 
+
   result.length !== 0
     ? res.json(orders)
     : res.json({ message: "No existen ordenes con este email" });
-
- 
 };
 module.exports = { generarOrden, getOrderByUser };
