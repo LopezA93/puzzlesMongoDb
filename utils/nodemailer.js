@@ -47,7 +47,7 @@ const mailOrden = async (user, order) => {
         
          `,
     })
-    
+    console.log(`Orden creada Numero ${order.numero}`)
   } catch (error) {
     console.log(`Error en el envio de la orden: ${error}`);
   } finally {
