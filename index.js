@@ -7,7 +7,7 @@ const MongoStore = require("connect-mongo");
 const cors = require("cors");
 app.use(cors({
   origin: "*",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  'Access-Control-Allow-Headers': 'Authorization',
 }));
 const productRoute = require("./routes/productos");
 const userRoute = require("./routes/users");
