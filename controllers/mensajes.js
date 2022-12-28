@@ -25,7 +25,8 @@ const getMsj = async (req, res) => {
     const mensj = getAll.map(i => {
         let mensaje = {
             email: i.email,
-            texto: i.texto
+            texto: i.texto,
+            fecha: i.timestamp
         };
         return mensaje
     });

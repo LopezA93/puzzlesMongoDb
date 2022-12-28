@@ -29,7 +29,6 @@ const User = mongoose.model("usuarios", userSchema);
 
 const mensajesSchema = new Schema({
   email: { type: String, required: true },
-  // tipo: { type: String, required: true },
   timestamp: { type: Date, default: Date.now },
   texto: { type: String, required: true, max: 400 },
 });

@@ -32,7 +32,7 @@ const saveCart = async (req, res) => {
 
 
   const { email, productos, total } = req.body;
-  console.log("email", email);
+
   const usuario = await User.findOne({ email: email });
   if (!usuario) {
     res.status(201).json({ message: "Error vuelva a intentarlo" });
@@ -47,7 +47,7 @@ const saveCart = async (req, res) => {
 
   const result = await cart.insertar(newCart);
   usuario.carrito.push(newCart)
-  console.log("carrito del user", usuario.carrito)
+
   await usuario.save()
 
   result
