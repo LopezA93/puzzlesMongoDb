@@ -3,8 +3,6 @@ const nodemailer = require("nodemailer");
 const EMAIL = process.env.EMAIL;
 const PASSWORD = process.env.PASSWORD;
 
-
-
 const transporter = nodemailer.createTransport({
   service: "gmail",
   port: 587,
@@ -15,15 +13,13 @@ const transporter = nodemailer.createTransport({
 });
 
 const mailOrden = async (user, order) => {
-  
   const prods = order.productos.map((i) => {
     i = {
       nombre: i.nombre,
       precio: i.precio,
       cantidad: i.cantidad,
     };
-    return ( 
-               `<tr>
+    return `<tr>
                   <td>
                     ${i.nombre}
                   </td>
@@ -33,17 +29,15 @@ const mailOrden = async (user, order) => {
                   <td>
                     ${i.cantidad}
                   </td>
-                </tr>`) 
+                </tr>`;
   });
   const items = JSON.stringify(prods);
   try {
-    console.log("prods,", prods);
     const info = await transporter.sendMail({
       to: user,
       from: EMAIL,
       subject: "Nueva orden generada de Puzzles",
-      html:
-        `
+      html: `
       <style>
     .tableProds {
         border: 1px solid #C0C0C0;
@@ -81,7 +75,7 @@ const mailOrden = async (user, order) => {
         ${prods} 
         </tbody>
           </table> 
-        <p> Total: ${order.total} </p>
+        <p> Total: $ ${order.total} </p>
         <p> Desde ya muchas gracias por su compra. Cualquier duda o consulta no dude en contactarnos.</p>
         
          `,

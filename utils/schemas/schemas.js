@@ -52,9 +52,10 @@ const ordenesSchema = new Schema({
   estado: { type: Boolean, default: true },
   productos: [
     {
-      nombre: { type: String, required: true },
-      precio: { type: Number, required: true },
-      cantidad: { type: Number, required: true },
+      _id: {type: mongoose.Schema.Types.ObjectId, ref:'productos'},
+      nombre: { type: mongoose.Schema.Types.String, ref:'productos', },
+      precio: { type: mongoose.Schema.Types.Number, ref:'productos' },
+      cantidad: { type: mongoose.Schema.Types.Number, ref:'productos',},
     },
   ],
   direccion: { type: String, required: true },

@@ -1,11 +1,31 @@
 const OrdenesMongo = require("../daos/ordenes");
-const { Ordenes } = require("../utils/schemas/schemas");
-
+const { Ordenes, Productos } = require("../utils/schemas/schemas");
 const orden = new OrdenesMongo();
 const mailOrden = require("../utils/nodemailer");
 
 
+
+
+const discountQty = async (nombre, cantidad) => {
+  
+    const filter = await Productos.findOne({nombre:nombre});
+    if (!filter) return console.log("Error no hay producto")
+    filter.stock = filter.stock - cantidad
+    filter.save()
+  
+  
+
+}
+const uptStock = (items) => {
+  items.map((i) => {
+    let nombre = i.nombre
+    let cantidad = i.cantidad
+    discountQty(nombre, cantidad)
+
+  })
+}
 const generarOrden = async (req, res) => {
+  
   const { email, productos, total, direccion, ciudad } = req.body;
   const getAll = await orden.getAll();
 
@@ -19,8 +39,9 @@ const generarOrden = async (req, res) => {
     ciudad,
     direccion,
   });
+  uptStock(productos)
   const result = await orden.insertar(newOrden);
-
+  
 
   if (result) {
     mailOrden(email, result);
