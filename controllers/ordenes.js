@@ -44,7 +44,7 @@ const generarOrden = async (req, res) => {
   
 
   if (result) {
-    mailOrden(email, result);
+    await mailOrden(email, result);
     res.json(result);
   } else {
     res.status(404).json({ message: "Error, vuelva a intentarlo" });
