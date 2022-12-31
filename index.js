@@ -68,7 +68,7 @@ app.use("/mercadopago", mercadoPagoRouter)
 
 //
 app.get("/", (req, res) => {
-  res.json({ message: "Bienvenido" });
+  res.json({ message: "Bienvenido API Puzzles Bar" });
 });
 
 app.get("*", (req, res) => {
