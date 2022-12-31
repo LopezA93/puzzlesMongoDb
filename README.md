@@ -11,4 +11,4 @@
 ## https://puzzlesmongodb.netlify.app/
 
 ### Repositorio CLIENT
-## https://github.com/LopezA93/puzzlesMongoDb
+## https://github.com/LopezA93/puzzlesMongoDB-front
